@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 
 export default function ContentFrame({ children, pageTitle }) {
   return (
-    <Container>
+    <Container className="pb-3">
       <header>
         <h1>{pageTitle}</h1>
       </header>

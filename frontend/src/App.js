@@ -9,6 +9,7 @@ import PageFrame from "./components/pageFrame";
 import ContentFrame from "./components/contentFrame";
 import AuthProvider from "./components/authProvider";
 import ProtectedRoute from "./components/protectedRoute";
+import Login from "./pages/login";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
               index
               element={
                 <ContentFrame pageTitle="Login">
-                  <h2>Please login</h2>
+                  <Login className="container-sm" />
                 </ContentFrame>
               }
             />
