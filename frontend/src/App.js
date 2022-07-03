@@ -7,33 +7,47 @@ import ReceiptUpload from "./pages/receiptUpload";
 
 import PageFrame from "./components/pageFrame";
 import ContentFrame from "./components/contentFrame";
+import AuthProvider from "./components/authProvider";
+import ProtectedRoute from "./components/protectedRoute";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PageFrame />}>
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PageFrame />}>
+            <Route
+              index
+              element={
+                <ContentFrame pageTitle="Login">
+                  <h2>Please login</h2>
+                </ContentFrame>
+              }
+            />
+            <Route
+              path="lunch-wishes"
+              element={
+                <ProtectedRoute>
+                  <ContentFrame pageTitle="Lunch wishes">
+                    <LunchWishes />
+                  </ContentFrame>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="receipt-upload" element={<ReceiptUpload />} />
+          </Route>
+
           <Route
-            index
+            path="*"
             element={
-              <ContentFrame pageTitle="Placeholder title">
-                <LunchWishes />
-              </ContentFrame>
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
             }
           />
-          <Route path="receipt-upload" element={<ReceiptUpload />} />
-        </Route>
-
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
