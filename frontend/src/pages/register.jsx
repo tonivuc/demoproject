@@ -1,8 +1,7 @@
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   return (
     <div style={{ maxWidth: "300px" }}>
       <Form>
@@ -18,15 +17,12 @@ function Login() {
         />
         <div className="d-flex justify-content-end">
           <Button className="mt-3" type="submit">
-            Login
+            Create user
           </Button>
         </div>
       </Form>
-      <p>
-        Don't have an account? Register <Link to="/register">here</Link>
-      </p>
     </div>
   );
 }
 
-export default Login;
+export default Register;

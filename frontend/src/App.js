@@ -10,6 +10,7 @@ import ContentFrame from "./components/contentFrame";
 import AuthProvider from "./components/authProvider";
 import ProtectedRoute from "./components/protectedRoute";
 import Login from "./pages/login";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -35,7 +36,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="receipt-upload" element={<ReceiptUpload />} />
+            <Route
+              path="register"
+              element={
+                <ContentFrame pageTitle="Register">
+                  <Register />
+                </ContentFrame>
+              }
+            />
           </Route>
 
           <Route
