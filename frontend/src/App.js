@@ -26,10 +26,10 @@ function App() {
               }
             />
             <Route
-              path="lunch-wishes"
+              path="tasks"
               element={
                 <ProtectedRoute>
-                  <ContentFrame pageTitle="Lunch wishes">
+                  <ContentFrame pageTitle="To-do list">
                     <LunchWishes />
                   </ContentFrame>
                 </ProtectedRoute>

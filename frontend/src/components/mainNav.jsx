@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 
 export default function MainNav() {
@@ -7,23 +7,29 @@ export default function MainNav() {
     <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Lunch system
+          Onboarding platform
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto" justify variant="tabs" defaultActiveKey="/">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            variant="tabs"
+            defaultActiveKey="/"
+          >
             <Nav.Item>
               <Nav.Link as={NavLink} to="/">
-                Home
+                Login
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link as={NavLink} to="/tasks">
+                Tasks
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link as={NavLink} to="/receipt-upload">
-                Test
+                Receipt upload
               </Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-2">Link</Nav.Link>
             </Nav.Item>
             <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
@@ -31,6 +37,7 @@ export default function MainNav() {
               </Nav.Link>
             </Nav.Item>
           </Nav>
+          <Button>Logout</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
