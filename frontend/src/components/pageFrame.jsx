@@ -1,14 +1,13 @@
-import { useParams } from "react-router-dom";
 import MainNav from "./mainNav";
 import { Outlet } from "react-router-dom";
 
-export default function PageFrame() {
-  let params = useParams();
+const PageFrame = () => {
   return (
     <>
       <MainNav></MainNav>
       <Outlet />
     </>
-    
   );
-}
+};
+
+export default PageFrame;

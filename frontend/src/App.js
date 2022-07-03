@@ -1,32 +1,37 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LunchWishes from './pages/lunchWishes';
-import ReceiptUpload from './pages/receiptUpload';
+import LunchWishes from "./pages/lunchWishes";
+import ReceiptUpload from "./pages/receiptUpload";
 
-import PageFrame from './components/pageFrame';
+import PageFrame from "./components/pageFrame";
+import ContentFrame from "./components/contentFrame";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<PageFrame />} >
+        <Route path="/" element={<PageFrame />}>
           <Route
-          index
-          element={<LunchWishes/>}
-          />
-          <Route path='receipt-upload' element={<ReceiptUpload />} />
-        </Route>
-        
-          <Route
-            path="*"
+            index
             element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-          }
+              <ContentFrame pageTitle="Placeholder title">
+                <LunchWishes />
+              </ContentFrame>
+            }
           />
+          <Route path="receipt-upload" element={<ReceiptUpload />} />
+        </Route>
+
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
