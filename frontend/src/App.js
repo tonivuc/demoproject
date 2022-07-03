@@ -22,7 +22,15 @@ function App() {
               index
               element={
                 <ContentFrame pageTitle="Login">
-                  <Login className="container-sm" />
+                  <Login />
+                </ContentFrame>
+              }
+            />
+            <Route
+              path="register"
+              element={
+                <ContentFrame pageTitle="Create account">
+                  <Register />
                 </ContentFrame>
               }
             />
@@ -36,16 +44,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="register"
-              element={
-                <ContentFrame pageTitle="Register">
-                  <Register />
-                </ContentFrame>
-              }
-            />
           </Route>
-
           <Route
             path="*"
             element={
