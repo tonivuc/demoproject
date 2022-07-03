@@ -1,0 +1,22 @@
+{
+  "name": "lunchsystem",
+  "version": "0.1.0",
+  "description": "Shared node project for backend and frontend",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "concurrently --kill-others \" npm --prefix ./backend/ run devStart\" \" npm --prefix ./frontend/ run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tonivuc/lunchsystem.git"
+  },
+  "author": "Toni Vucic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tonivuc/lunchsystem/issues"
+  },
+  "homepage": "https://github.com/tonivuc/lunchsystem#readme",
+  "dependencies": {
+    "concurrently": "^7.2.2"
+  }
+}
