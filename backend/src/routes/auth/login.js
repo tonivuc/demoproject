@@ -1,3 +1,6 @@
+//Code from here:
+//https://www.tutsmake.com/node-js-express-mysql-user-authentication-rest-api-example/
+
 const express = require("express");
 const router = express.Router();
 const db = require("../../database");

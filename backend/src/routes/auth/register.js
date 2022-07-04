@@ -1,3 +1,6 @@
+//Code from here:
+//https://www.tutsmake.com/node-js-express-mysql-user-authentication-rest-api-example/
+
 const express = require("express");
 const router = express.Router();
 const db = require("../../database");
@@ -48,7 +51,7 @@ router.post("/", (req, res, next) => {
   );
 });
 
-//Temporary for debuging, remove later.
+//TODO: Temporary for debuging, remove later.
 router.get("/", async (req, res) => {
   const results = await db.promise().query(`SELECT * FROM users`);
   console.log(results[0]);
