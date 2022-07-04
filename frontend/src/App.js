@@ -52,6 +52,13 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="unathorized" element={
+                  <ContentFrame pageTitle="Unauthorized">
+                    <h2>You need to log in to view this page.</h2>
+                  </ContentFrame>
+              }
+            />
           </Route>
           <Route
             path="*"
