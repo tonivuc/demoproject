@@ -27,6 +27,14 @@ function App() {
               }
             />
             <Route
+              path="login"
+              element={
+                <ContentFrame pageTitle="Login">
+                  <Login />
+                </ContentFrame>
+              }
+            />
+            <Route
               path="register"
               element={
                 <ContentFrame pageTitle="Create account">

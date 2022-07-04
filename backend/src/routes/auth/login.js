@@ -48,7 +48,6 @@ router.post("/", async (req, res, next) => {
               `UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`
             );
             return res.status(200).send({
-              msg: "Logged in!",
               token,
               user: result[0],
             });

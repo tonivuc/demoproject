@@ -1,7 +1,7 @@
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { registerUser } from "../api/auth.";
+import { registerUser } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
