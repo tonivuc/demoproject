@@ -26,7 +26,7 @@ router.post("/", (req, res, next) => {
           } else {
             // has hashed pw => add to database
             db.query(
-              `INSERT INTO users VALUES (NULL, ${db.escape(
+              `INSERT INTO users (username, password) VALUES (${db.escape(
                 req.body.username
               )}, ${db.escape(hash)})`,
               (err, result) => {
@@ -46,6 +46,13 @@ router.post("/", (req, res, next) => {
       }
     }
   );
+});
+
+//Temporary for debuging, remove later.
+router.get("/", async (req, res) => {
+  const results = await db.promise().query(`SELECT * FROM users`);
+  console.log(results[0]);
+  res.status(200).send(results[0]);
 });
 
 module.exports = router;

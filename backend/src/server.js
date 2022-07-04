@@ -12,4 +12,5 @@ app.post("/", (req, res) => {
 
 app.use("/api/lunch-wishes", require("./routes/api/lunchWishes"));
 app.use("/auth/register", require("./routes/auth/register"));
+app.use("/auth/login", require("./routes/auth/login"));
 app.listen(port);
