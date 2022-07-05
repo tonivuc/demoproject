@@ -27,7 +27,7 @@ router.post("/", async (req, res, next) => {
     await userQueries.insertUser(req.db, username, hashedPassword);
     console.log("Inserted user");
     console.log("test", loginUser);
-    loginUser(req.db, username);
+    loginUser(req.db, username, password, res);
   } catch (err) {
     console.log(err);
     res.status(400).send({
