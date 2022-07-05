@@ -5,7 +5,7 @@ function ToDoList(props) {
   const toDoItems = props.toDoItems || [];
 
   return (
-    <ListGroup className={props.className} as="ul" className="mb-4">
+    <ListGroup className={props.className + "mb-4"} as="ul">
       {toDoItems.map((toDoData) => (
         <ToDoListItem toDoData={toDoData} />
       ))}
