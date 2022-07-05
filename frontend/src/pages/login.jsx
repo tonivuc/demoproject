@@ -3,25 +3,22 @@ import Button from "react-bootstrap/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth";
 import { useState } from "react";
+import { useAuth } from "../components/authProvider";
 
 function Login() {
+  const { doLogin } = useAuth();
   const navigate = useNavigate();
 
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
-
-  const handleResponse = (response) => {
-    const { token, user } = response;
-    navigate("/tasks");
-  };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-    const response = await loginUser(values.username, values.password);
-    handleResponse(response);
+    await doLogin(values.username, values.password);
+    navigate("/tasks");
   };
 
   const handleUsernameInputChange = (event) => {

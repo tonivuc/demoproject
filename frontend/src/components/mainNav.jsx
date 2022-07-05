@@ -6,7 +6,7 @@ export default function MainNav() {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/tasks">
           Onboarding platform
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -17,7 +17,7 @@ export default function MainNav() {
             defaultActiveKey="/"
           >
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/">
+              <Nav.Link as={NavLink} to="/login">
                 Login
               </Nav.Link>
             </Nav.Item>

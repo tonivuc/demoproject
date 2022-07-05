@@ -1,18 +1,14 @@
 import React from "react";
+import { loginUser } from "../api/auth";
 
 const AuthContext = React.createContext(null);
-
-const fakeAuth = () =>
-  new Promise((resolve) => {
-    setTimeout(() => resolve("2342f2f1d131rf12"), 750);
-  });
 
 const AuthProvider = ({ children }) => {
   const [token, setToken] = React.useState(null);
 
-  const handleLogin = async () => {
-    const token = await fakeAuth();
-
+  const handleLogin = async (username, password) => {
+    const {data} = await loginUser(username, password);
+    const {user, token} = data;
     setToken(token);
   };
 
@@ -22,8 +18,8 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     token,
-    onLogin: handleLogin,
-    onLogout: handleLogout,
+    doLogin: handleLogin,
+    doLogout: handleLogout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
