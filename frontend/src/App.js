@@ -47,7 +47,7 @@ function App() {
               path="tasks"
               element={
                 <ProtectedRoute>
-                  <ContentFrame pageTitle="To-do list">
+                  <ContentFrame pageTitle="">
                     <Tasks />
                   </ContentFrame>
                 </ProtectedRoute>

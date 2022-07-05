@@ -29,38 +29,33 @@ function ToDoForm(props) {
   };
 
   return (
-    <Row>
-      <Col sm={8}>
-        <Form
-          noValidate
-          validated={validated}
-          onSubmit={(e) =>
-            submitForm(
-              e,
-              nameInputRef?.current?.value,
-              lunchWishInputRef?.current?.value
-            )
-          }
-        >
-          <Stack gap={2}>
-            <Form.Control placeholder="Title" ref={nameInputRef} />
-            <Form.Control.Feedback type="invalid">
-              Please provide a title.
-            </Form.Control.Feedback>
-            <Form.Control
-              required
-              as="textarea"
-              placeholder="Description"
-              ref={lunchWishInputRef}
-            />
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Stack>
-        </Form>
-      </Col>
-      <Col></Col>
-    </Row>
+    <Form
+      noValidate
+      validated={validated}
+      onSubmit={(e) =>
+        submitForm(
+          e,
+          nameInputRef?.current?.value,
+          lunchWishInputRef?.current?.value
+        )
+      }
+    >
+      <Stack gap={2}>
+        <Form.Control placeholder="Title" ref={nameInputRef} />
+        <Form.Control.Feedback type="invalid">
+          Please provide a title.
+        </Form.Control.Feedback>
+        <Form.Control
+          required
+          as="textarea"
+          placeholder="Description"
+          ref={lunchWishInputRef}
+        />
+        <Button className="w-50" variant="primary" type="submit">
+          Add
+        </Button>
+      </Stack>
+    </Form>
   );
 }
 

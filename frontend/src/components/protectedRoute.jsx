@@ -5,9 +5,9 @@ const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   console.log("Token is " + token);
 
-  if (!token) {
-    return <Navigate to="/unathorized" replace />;
-  }
+  // if (!token) {
+  //   return <Navigate to="/unathorized" replace />;
+  // }
 
   return children;
 };

@@ -5,6 +5,8 @@ import LunchWishList from "../components/lunchWishList";
 import { useState } from "react";
 import axios from "axios";
 import ToDoForm from "../components/toDoForm";
+import ToDoList from "../components/toDoList";
+import { Col, Row } from "react-bootstrap";
 
 function Tasks() {
   const [lunchWishes, setLunchWishes] = useState([]);
@@ -36,11 +38,21 @@ function Tasks() {
       });
   };
 
+  const toDoItems = [
+    { title: "Wash roof", description: "Use a mop and was with green soap." },
+  ];
+
   return (
-    <>
-      <ToDoForm onSubmit={onSubmitLunchWish} />
-      <LunchWishList className="mt-3" lunchWishes={lunchWishes} />
-    </>
+    <Row>
+      <Col sm={6}>
+        <h2>Tasks</h2>
+        <ToDoList toDoItems={toDoItems} />
+      </Col>
+      <Col sm={6}>
+        <h2>Add task</h2>
+        <ToDoForm onSubmit={onSubmitLunchWish} />
+      </Col>
+    </Row>
   );
 }
 
