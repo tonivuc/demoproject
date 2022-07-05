@@ -9,6 +9,8 @@ const db = require("../../database");
 const jwt = require("jsonwebtoken");
 const userQueries = require("../../queries/users");
 const utils = require("../../utils");
+const loginUser = require("./login");
+const loginModule = require("./login");
 
 router.post("/", async (req, res, next) => {
   try {
@@ -24,12 +26,9 @@ router.post("/", async (req, res, next) => {
     const hashedPassword = await utils.hashPassword(password);
 
     await userQueries.insertUser(req.db, username, hashedPassword);
-
-    const userRes = await userQueries.selectUser(req.db, username);
-    if (userRes[0]?.length) {
-      res.status(201).send(userRes[0][0]);
-    }
-
+    console.log("Inserted user")
+    console.log("test",loginUser)
+    loginUser(req.db, username);
   } catch (err) {
     console.log(err);
     res.status(400).send({
