@@ -9,7 +9,7 @@ app.use(express.json());
 //Add db connection as middleware
 //Source: https://stackoverflow.com/questions/45658061/asynchronous-call-of-mysql-on-node-js
 app.use(async (req, res, next) => {
-  if (! app.db) {
+  if (!app.db) {
     const dbCon = require("./database2");
     app.db = await dbCon;
   }
@@ -23,5 +23,6 @@ app.post("/", (req, res) => {
 
 app.use("/api/lunch-wishes", require("./routes/api/lunchWishes"));
 app.use("/auth/register", require("./routes/auth/register"));
-app.use("/auth/login", require("./routes/auth/login"));
+const loginModule = require("./routes/auth/login");
+app.use("/auth/login", loginModule.router);
 app.listen(port);

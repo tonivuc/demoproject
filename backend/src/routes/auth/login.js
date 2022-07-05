@@ -11,31 +11,26 @@ const jwt = require("jsonwebtoken");
 const userQueries = require("../../queries/users");
 
 router.post("/", async (req, res, next) => {
-  const {username, password} = req.body;
+  const { username, password } = req.body;
   const db = req.db;
-  loginUser(db, username, password, res)
+  loginUser(db, username, password, res);
 });
 
 const loginUser = async (db, username, password, res) => {
   try {
     result = await userQueries.selectUser(db, username);
 
-    if (!result.length) {
+    if (!result.length || !result[0].length) {
       return res.status(401).send({
         msg: "Email or password is incorrect!",
       });
     }
 
-    const isMatching = await bcrypt.compare(
-        password,
-        result[0]["password"]
-    );
+    const isMatching = await bcrypt.compare(password, result[0][0]["password"]);
     if (isMatching) {
-      const token = jwt.sign(
-        { id: result[0].id },
-        "the-super-strong-secrect",
-        { expiresIn: "1h" }
-      );
+      const token = jwt.sign({ id: result[0].id }, "the-super-strong-secrect", {
+        expiresIn: "1h",
+      });
       //TODO: There is a bug here I think where the previous login is returned and not the current login time. -Toni
       db.query(
         `UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`
@@ -53,15 +48,14 @@ const loginUser = async (db, username, password, res) => {
     console.log(err);
     res.status(400).send({
       msg: err,
-    })
+    });
   }
-}
+};
 
 module.exports = {
   router,
-  default: router,
-  loginUser: loginUser
-}
+  loginUser,
+};
 
 /*
 db.query(
@@ -115,5 +109,4 @@ db.query(
 );
 */
 
-module.exports = router;
-
+//module.exports = router;

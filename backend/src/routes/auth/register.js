@@ -9,12 +9,11 @@ const db = require("../../database");
 const jwt = require("jsonwebtoken");
 const userQueries = require("../../queries/users");
 const utils = require("../../utils");
-const loginUser = require("./login");
-const loginModule = require("./login");
+const { loginUser } = require("./login");
 
 router.post("/", async (req, res, next) => {
   try {
-    const {username, password} = req.body;
+    const { username, password } = req.body;
 
     const result = await userQueries.selectUser(req.db, username);
     if (result[0]?.length) {
@@ -26,14 +25,14 @@ router.post("/", async (req, res, next) => {
     const hashedPassword = await utils.hashPassword(password);
 
     await userQueries.insertUser(req.db, username, hashedPassword);
-    console.log("Inserted user")
-    console.log("test",loginUser)
+    console.log("Inserted user");
+    console.log("test", loginUser);
     loginUser(req.db, username);
   } catch (err) {
     console.log(err);
     res.status(400).send({
       msg: err,
-    })
+    });
   }
 });
 
