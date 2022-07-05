@@ -39,7 +39,7 @@ function Tasks() {
   };
 
   const toDoItems = [
-    { title: "Wash roof", description: "Use a mop and was with green soap." },
+    { title: "Wash roof", description: "Use a mop and wash with green soap." },
   ];
 
   return (
