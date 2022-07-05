@@ -6,6 +6,16 @@ console.log("Runnign dev server backend!");
 
 app.use(express.json());
 
+//Source: https://stackoverflow.com/questions/45658061/asynchronous-call-of-mysql-on-node-js
+app.use(async (req, res, next) => {
+  if (! app.db) {
+    const dbCon = require("./database2");
+    app.db = await dbCon;
+  }
+  req.db = app.db;
+  return next();
+});
+
 app.post("/", (req, res) => {
   res.send(404);
 });
