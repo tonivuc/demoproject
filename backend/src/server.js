@@ -6,6 +6,7 @@ console.log("Runnign dev server backend!");
 
 app.use(express.json());
 
+//Add db connection as middleware
 //Source: https://stackoverflow.com/questions/45658061/asynchronous-call-of-mysql-on-node-js
 app.use(async (req, res, next) => {
   if (! app.db) {

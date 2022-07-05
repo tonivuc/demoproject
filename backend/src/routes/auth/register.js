@@ -6,50 +6,39 @@ const router = express.Router();
 const db = require("../../database");
 //const { signupValidation, loginValidation } = require('./validation');
 //const { validationResult } = require('express-validator');
-const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const userQueries = require("../../queries/users");
+const utils = require("../../utils");
 
-router.post("/v2", async (req, res, next) => {
-  const {username, password} = req.body;
-  const result = await checkForUser(req.db, username);
-  if (result[0]?.length) {
-    return res.status(409).send({
-      msg: "This user is already in use!",
-    });
-  }
-  else {
-    return res.status(201).send({
-      msg: "The user has been registerd with us!",
-    });
+router.post("/", async (req, res, next) => {
+  try {
+    const {username, password} = req.body;
+
+    const result = await userQueries.selectUser(req.db, username);
+    if (result[0]?.length) {
+      return res.status(409).send({
+        msg: "This user is already in use!",
+      });
+    }
+
+    const hashedPassword = await utils.hashPassword(password);
+
+    await userQueries.insertUser(req.db, username, hashedPassword);
+
+    const userRes = await userQueries.selectUser(req.db, username);
+    if (userRes[0]?.length) {
+      res.status(201).send(userRes[0][0]);
+    }
+
+  } catch (err) {
+    console.log(err);
+    res.status(400).send({
+      msg: err,
+    })
   }
 });
 
-const register = (username, password) => {
-
-}
-
-const checkForUser = async (db, username) => {
-
-  const result = await db.execute( `SELECT * FROM users WHERE LOWER(username) = LOWER(${db.escape(
-    username
-  )});`);
-  return result;
-
-  db.query(
-    `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
-      req.body.username
-    )});`,
-    (err, result) => {
-      if (result?.length) {
-        return res.status(409).send({
-          msg: "This user is already in use!",
-        });
-      }
-    }
-  );
-}
-
-router.post("/", (req, res, next) => {
+router.post("/old", (req, res, next) => {
   db.query(
     `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
       req.body.username
