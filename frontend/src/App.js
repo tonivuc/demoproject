@@ -11,6 +11,7 @@ import AuthProvider from "./components/authProvider";
 import ProtectedRoute from "./components/protectedRoute";
 import Login from "./pages/login";
 import Register from "./pages/register";
+import Tasks from "./pages/tasks";
 
 function App() {
   return (
@@ -47,16 +48,17 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ContentFrame pageTitle="To-do list">
-                    <LunchWishes />
+                    <Tasks />
                   </ContentFrame>
                 </ProtectedRoute>
               }
             />
             <Route
-              path="unathorized" element={
-                  <ContentFrame pageTitle="Unauthorized">
-                    <h2>You need to log in to view this page.</h2>
-                  </ContentFrame>
+              path="unathorized"
+              element={
+                <ContentFrame pageTitle="Unauthorized">
+                  <h2>You need to log in to view this page.</h2>
+                </ContentFrame>
               }
             />
           </Route>
