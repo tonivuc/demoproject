@@ -9,6 +9,46 @@ const db = require("../../database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+router.post("/v2", async (req, res, next) => {
+  const {username, password} = req.body;
+  const result = await checkForUser(req.db, username);
+  if (result[0]?.length) {
+    return res.status(409).send({
+      msg: "This user is already in use!",
+    });
+  }
+  else {
+    return res.status(201).send({
+      msg: "The user has been registerd with us!",
+    });
+  }
+});
+
+const register = (username, password) => {
+
+}
+
+const checkForUser = async (db, username) => {
+
+  const result = await db.execute( `SELECT * FROM users WHERE LOWER(username) = LOWER(${db.escape(
+    username
+  )});`);
+  return result;
+
+  db.query(
+    `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
+      req.body.username
+    )});`,
+    (err, result) => {
+      if (result?.length) {
+        return res.status(409).send({
+          msg: "This user is already in use!",
+        });
+      }
+    }
+  );
+}
+
 router.post("/", (req, res, next) => {
   db.query(
     `SELECT * FROM users WHERE LOWER(email) = LOWER(${db.escape(
