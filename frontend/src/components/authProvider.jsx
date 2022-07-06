@@ -3,6 +3,7 @@ import { loginUser } from "../api/auth";
 
 const AuthContext = React.createContext(null);
 
+//TODO: Persist user in session or localstorage
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
 
