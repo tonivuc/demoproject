@@ -19,6 +19,7 @@ router.post("/", async (req, res, next) => {
 const loginUser = async (db, username, password, res) => {
   try {
     result = await userQueries.selectUser(db, username);
+    const userId = result[0][0]["id"];
 
     if (!result.length || !result[0].length) {
       return res.status(401).send({
@@ -28,16 +29,23 @@ const loginUser = async (db, username, password, res) => {
 
     const isMatching = await bcrypt.compare(password, result[0][0]["password"]);
     if (isMatching) {
-      const token = jwt.sign({ id: result[0].id }, "the-super-strong-secrect", {
-        expiresIn: "1h",
-      });
-      //TODO: There is a bug here I think where the previous login is returned and not the current login time. -Toni
-      db.query(
-        `UPDATE users SET last_login = now() WHERE id = '${result[0].id}'`
+      const token = jwt.sign(
+        { username: username, userId: userId },
+        "the-super-strong-secrect",
+        {
+          expiresIn: "1h",
+        }
       );
+      //TODO: There is a bug here I think where the previous login is returned and not the current login time. -Toni
+      db.query(`UPDATE users SET last_login = now() WHERE id = '${userId}'`);
+
+      res.cookie("token", token, {
+        httpOnly: true,
+      });
+
       return res.status(200).send({
-        token,
-        user: result[0],
+        username: username,
+        userId: userId,
       });
     } else {
       return res.status(401).send({

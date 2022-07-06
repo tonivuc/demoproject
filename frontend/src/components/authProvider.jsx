@@ -4,20 +4,19 @@ import { loginUser } from "../api/auth";
 const AuthContext = React.createContext(null);
 
 const AuthProvider = ({ children }) => {
-  const [token, setToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
 
   const handleLogin = async (username, password) => {
-    const {data} = await loginUser(username, password);
-    const {user, token} = data;
-    setToken(token);
+    const { data } = await loginUser(username, password);
+    setUser(data);
   };
 
   const handleLogout = () => {
-    setToken(null);
+    setUser(null);
   };
 
   const value = {
-    token,
+    user,
     doLogin: handleLogin,
     doLogout: handleLogout,
   };

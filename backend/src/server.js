@@ -1,4 +1,5 @@
 const express = require("express");
+const { cookieJwtAuth } = require("./middleware/cookieJwtAuth");
 const app = express();
 const port = 5000;
 
@@ -21,7 +22,11 @@ app.post("/", (req, res) => {
   res.send(404);
 });
 
-app.use("/api/lunch-wishes", require("./routes/api/lunchWishes"));
+app.use(
+  "/api/lunch-wishes",
+  cookieJwtAuth,
+  require("./routes/api/lunchWishes")
+);
 app.use("/auth/register", require("./routes/auth/register"));
 const loginModule = require("./routes/auth/login");
 app.use("/auth/login", loginModule.router);

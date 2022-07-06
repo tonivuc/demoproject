@@ -2,12 +2,12 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "./authProvider";
 
 const ProtectedRoute = ({ children }) => {
-  const { token } = useAuth();
-  console.log("Token is " + token);
+  const { user } = useAuth();
+  console.log("User is " + JSON.stringify(user));
 
-  // if (!token) {
-  //   return <Navigate to="/unathorized" replace />;
-  // }
+  if (!user) {
+    return <Navigate to="/unathorized" replace />;
+  }
 
   return children;
 };
