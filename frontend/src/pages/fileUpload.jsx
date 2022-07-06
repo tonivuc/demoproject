@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 
-function ReceiptUpload() {
+function FileUploadPage() {
   return (
     <>
       <h1>Upload receipts and other pics :)</h1>
@@ -9,4 +9,4 @@ function ReceiptUpload() {
   );
 }
 
-export default ReceiptUpload;
+export default FileUploadPage;
