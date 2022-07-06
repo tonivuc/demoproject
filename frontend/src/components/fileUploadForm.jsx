@@ -5,15 +5,6 @@ import { uploadFiles } from "../api/files";
 import uniqid from "uniqid";
 
 const FileUploadForm = () => {
-  /*
-  const [selectedFile1, setSelectedFile1] = useState();
-
-  const updateSelectedFile1 = (selectedFile) => {
-    setSelectedFile1(selectedFile);
-  };
-  */
-
-  //Idea:
   const [selectedFiles, setSelectedFiles] = useState([3]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
