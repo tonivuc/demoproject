@@ -1,3 +1,5 @@
+//Inspiration from: https://www.robinwieruch.de/react-router-authentication/
+
 import React from "react";
 import { loginUser } from "../api/auth";
 

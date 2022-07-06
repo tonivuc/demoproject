@@ -1,4 +1,4 @@
-import LunchWishForm from "../components/lunchWishForm";
+import LunchWishForm from "../components/old/lunchWishForm";
 import Container from "react-bootstrap/Container";
 import React, { useEffect } from "react";
 import LunchWishList from "../components/lunchWishList";

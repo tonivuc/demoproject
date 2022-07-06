@@ -2,8 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LunchWishes from "./pages/lunchWishes";
-import ReceiptUpload from "./pages/receiptUpload";
+import FileUploadPage from "./pages/fileUpload";
 
 import PageFrame from "./components/pageFrame";
 import ContentFrame from "./components/contentFrame";
@@ -51,6 +50,14 @@ function App() {
                     <Tasks />
                   </ContentFrame>
                 </ProtectedRoute>
+              }
+            />
+            <Route
+              path="file-upload"
+              element={
+                <ContentFrame pageTitle="File upload">
+                  <FileUploadPage />
+                </ContentFrame>
               }
             />
             <Route
