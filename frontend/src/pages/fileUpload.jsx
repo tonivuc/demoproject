@@ -1,10 +1,11 @@
 import Button from "react-bootstrap/Button";
+import FileUploadForm from "../components/fileUploadForm";
 
 function FileUploadPage() {
   return (
     <>
-      <h1>Upload receipts and other pics :)</h1>
-      <Button>Upload picture</Button>
+      <h2>Upload whatever you want :)</h2>
+      <FileUploadForm></FileUploadForm>
     </>
   );
 }
