@@ -27,8 +27,8 @@ export default function MainNav() {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link as={NavLink} to="/receipt-upload">
-                Receipt upload
+              <Nav.Link as={NavLink} to="/file-upload">
+                File upload
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>

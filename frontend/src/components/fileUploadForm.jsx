@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import FileUploadInput from "./fileUploadInput";
 import { uploadFiles } from "../api/files";
+import uniqid from "uniqid";
 
 const FileUploadForm = () => {
   /*
@@ -24,22 +25,14 @@ const FileUploadForm = () => {
     });
   };
 
-  // On file upload (click the upload button)
   const onFileUpload = () => {
-    console.log("onFileUpload, selectedFiles:");
-    console.log(selectedFiles);
-    // Create an object of formData
     const formData = new FormData();
 
     selectedFiles.map((selectedFile) => {
       formData.append("myFile", selectedFile, selectedFile.name);
     });
     setUploadedFiles(selectedFiles);
-    console.log("FormData to send: ");
-    console.log(formData);
 
-    // Request made to the backend api
-    // Send formData object
     sendFormData(formData);
   };
 
@@ -68,10 +61,10 @@ const FileUploadForm = () => {
       <Button onClick={onFileUpload}>Upload pictures</Button>
       {uploadedFiles.map((uploadedFile) => {
         return (
-          <>
+          <div key={uniqid() + uploadedFile.name}>
             <p>{uploadedFile.name}</p>
             <img src={provideImgSrc(uploadedFile)}></img>
-          </>
+          </div>
         );
       })}
     </Stack>
