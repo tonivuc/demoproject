@@ -4,8 +4,10 @@ import FileUploadInput from "./fileUploadInput";
 import { uploadFiles } from "../api/files";
 import uniqid from "uniqid";
 
-const DynamicFileUploadForm = () => {
-  const [inputPrompts, setInputPrompts] = useState([
+const DynamicFileUploadForm = (props) => {
+  const { optionalInputsProps } = props;
+
+  const [inputProps, setInputProps] = useState([
     { prompt: "Profile picture", required: true },
     { prompt: "Signed employment contract", required: true },
     { prompt: "Signed equipment agreement", required: true },
@@ -43,17 +45,23 @@ const DynamicFileUploadForm = () => {
     return URL.createObjectURL(file);
   };
 
+  const FileUploadInputs = ({ inputPrompts: inputProps }) => {
+    return inputProps.map((inputProp, index) => (
+      <FileUploadInput
+        required={inputProp.required}
+        prompt={inputProp.prompt}
+        inputNr={index}
+        onSelectedFileChange={updateSelectedFile}
+      />
+    ));
+  };
+
   return (
     <Form>
       <Stack>
-        {inputPrompts.map((inputPrompt, index) => (
-          <FileUploadInput
-            required={inputPrompt.required}
-            prompt={inputPrompt.prompt}
-            inputNr={index}
-            onSelectedFileChange={updateSelectedFile}
-          />
-        ))}
+        <FileUploadInputs inputPrompts={inputProps} />
+        {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
+        <FileUploadInputs inputPrompts={optionalInputsProps} />
         <Button onClick={onFileUpload}>Upload pictures</Button>
         {uploadedFiles.map((uploadedFile) => {
           return (
