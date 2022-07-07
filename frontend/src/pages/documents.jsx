@@ -22,13 +22,6 @@ function DocumentsPage() {
           <h3>Upload required documents and optional ones</h3>
           <DynamicFileUploadForm optionalInputsProps={optionalInputsProps} />
         </Col>
-        <Col sm={6}>
-          <h3>Choose optional documents to upload</h3>
-          <DocumentPicker
-            documentTypes={optionalDocuments}
-            addOptinalInput={addOptionalInput}
-          />
-        </Col>
       </Row>
     </>
   );

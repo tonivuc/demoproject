@@ -5,8 +5,12 @@ import uniqid from "uniqid";
 const FileUploadInput = (props) => {
   const { prompt, inputNr, onSelectedFileChange, uniqueId } = props;
 
+  console.log("Rendering FileUploadInput with index " + inputNr);
+
   const onFileChange = (event) => {
-    const input = event.target;
+    console.log("onSelectedFilechange");
+    console.log(onSelectedFileChange);
+    //const input = event.target;
 
     // Object.getOwnPropertyDescriptor(
     //   window.HTMLInputElement.prototype,
@@ -15,6 +19,7 @@ const FileUploadInput = (props) => {
 
     // // This will trigger a new render for the component
     // input.dispatchEvent(new Event("change", { bubbles: true }));
+    console.log(onSelectedFileChange);
     onSelectedFileChange(inputNr, event.target.files[0]);
   };
 
