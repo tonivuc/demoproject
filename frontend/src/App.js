@@ -11,6 +11,7 @@ import ProtectedRoute from "./components/protectedRoute";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Tasks from "./pages/tasks";
+import DocumentsPage from "./pages/documents";
 
 function App() {
   return (
@@ -57,6 +58,14 @@ function App() {
               element={
                 <ContentFrame pageTitle="File upload">
                   <FileUploadPage />
+                </ContentFrame>
+              }
+            />
+            <Route
+              path="documents-upload"
+              element={
+                <ContentFrame pageTitle="Documents">
+                  <DocumentsPage />
                 </ContentFrame>
               }
             />
