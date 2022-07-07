@@ -9,7 +9,6 @@ function DocumentsPage() {
   const [optionalInputsProps, setOptionalInputsProps] = useState([]);
 
   const addOptionalInput = (inputLabel) => {
-    console.log("addOptionalInput " + inputLabel);
     setOptionalInputsProps((previousArray) => [
       ...previousArray,
       { prompt: inputLabel, required: false },
@@ -21,9 +20,7 @@ function DocumentsPage() {
       <Row>
         <Col sm={6}>
           <h3>Upload required documents and optional ones</h3>
-          <DynamicFileUploadForm
-            optionalInputsProps={optionalInputsProps}
-          ></DynamicFileUploadForm>
+          <DynamicFileUploadForm optionalInputsProps={optionalInputsProps} />
         </Col>
         <Col sm={6}>
           <h3>Choose optional documents to upload</h3>

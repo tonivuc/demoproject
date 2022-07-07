@@ -16,12 +16,29 @@ const DynamicFileUploadForm = (props) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
+  /*
   const updateSelectedFile = (fileInputNr, selectedFile) => {
+    console.log("Updating nr. " + fileInputNr);
     setSelectedFiles((selectedFiles) => {
       const newSelectedFiles = [...selectedFiles];
+      console.log("newSelectedFiles before: ");
+      console.log(newSelectedFiles);
       if (!newSelectedFiles[fileInputNr]) {
         newSelectedFiles.splice(fileInputNr, 0, selectedFile);
       }
+      console.log("newSelectedFiles: ");
+      console.log(newSelectedFiles);
+      return newSelectedFiles;
+    });
+  };
+  */
+  const updateSelectedFile = (fileInputNr, selectedFile) => {
+    console.log("Running updateSelectedFile");
+    setSelectedFiles((selectedFiles) => {
+      const newSelectedFiles = [...selectedFiles];
+      newSelectedFiles[fileInputNr] = selectedFile;
+      //console.log("newSelectedFiles");
+      //console.log(newSelectedFiles);
       return newSelectedFiles;
     });
   };
@@ -48,6 +65,9 @@ const DynamicFileUploadForm = (props) => {
   const FileUploadInputs = ({ inputPrompts: inputProps }) => {
     return inputProps.map((inputProp, index) => (
       <FileUploadInput
+        test={selectedFiles}
+        setSelectedFiles={setSelectedFiles}
+        uniqueId={uniqid()}
         required={inputProp.required}
         prompt={inputProp.prompt}
         inputNr={index}
@@ -59,6 +79,14 @@ const DynamicFileUploadForm = (props) => {
   return (
     <Form>
       <Stack>
+        {/* {inputProps.map((inputProp, index) => (
+          <FileUploadInput
+            required={inputProp.required}
+            prompt={inputProp.prompt}
+            inputNr={index}
+            onSelectedFileChange={updateSelectedFile}
+          />
+        ))} */}
         <FileUploadInputs inputPrompts={inputProps} />
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
         <FileUploadInputs inputPrompts={optionalInputsProps} />
