@@ -6,9 +6,15 @@ import DynamicFileUploadForm from "../components/dynamicFileUploadForm";
 function DocumentsPage() {
   const optionalDocuments = ["Sick leave form", "Cat at work form", "CV"];
 
-  const [optionalInputsProps, setOptionalInputsProps] = useState([
-    { prompt: "Profile picture", required: false },
-  ]);
+  const [optionalInputsProps, setOptionalInputsProps] = useState([]);
+
+  const addOptionalInput = (inputLabel) => {
+    console.log("addOptionalInput " + inputLabel);
+    setOptionalInputsProps((previousArray) => [
+      ...previousArray,
+      { prompt: inputLabel, required: false },
+    ]);
+  };
 
   return (
     <>
@@ -21,7 +27,10 @@ function DocumentsPage() {
         </Col>
         <Col sm={6}>
           <h3>Choose optional documents to upload</h3>
-          <DocumentPicker documentTypes={optionalDocuments} />
+          <DocumentPicker
+            documentTypes={optionalDocuments}
+            addOptinalInput={addOptionalInput}
+          />
         </Col>
       </Row>
     </>
