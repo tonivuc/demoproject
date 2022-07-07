@@ -65,7 +65,6 @@ const DynamicFileUploadForm = (props) => {
   const FileUploadInputs = ({ inputPrompts: inputProps }) => {
     return inputProps.map((inputProp, index) => (
       <FileUploadInput
-        test={selectedFiles}
         setSelectedFiles={setSelectedFiles}
         uniqueId={uniqid()}
         required={inputProp.required}
@@ -79,17 +78,25 @@ const DynamicFileUploadForm = (props) => {
   return (
     <Form>
       <Stack>
-        {/* {inputProps.map((inputProp, index) => (
+        {inputProps.map((inputProp, index) => (
           <FileUploadInput
+            key={uniqid()}
             required={inputProp.required}
             prompt={inputProp.prompt}
             inputNr={index}
             onSelectedFileChange={updateSelectedFile}
           />
-        ))} */}
-        <FileUploadInputs inputPrompts={inputProps} />
+        ))}
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
-        <FileUploadInputs inputPrompts={optionalInputsProps} />
+        {optionalInputsProps.map((inputProp, index) => (
+          <FileUploadInput
+            key={uniqid()}
+            required={inputProp.required}
+            prompt={inputProp.prompt}
+            inputNr={index}
+            onSelectedFileChange={updateSelectedFile}
+          />
+        ))}
         <Button onClick={onFileUpload}>Upload pictures</Button>
         {uploadedFiles.map((uploadedFile) => {
           return (

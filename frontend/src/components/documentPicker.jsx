@@ -1,5 +1,6 @@
 import { Dropdown, ListGroup } from "react-bootstrap";
 import AddDocumentListItem from "./old/addDocumentListItem";
+import uniqid from "uniqid";
 
 const DocumentPicker = (props) => {
   const { documentTypes, addOptinalInput } = props;
@@ -11,6 +12,7 @@ const DocumentPicker = (props) => {
         {documentTypes.map((docuType) => {
           return (
             <Dropdown.Item
+              key={uniqid()}
               onClick={() => {
                 addOptinalInput(docuType);
               }}
