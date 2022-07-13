@@ -40,7 +40,7 @@ function BasicDropzone({ onDrop, inputNr, prompt }) {
   } = useDropzone({
     onDrop,
     maxFiles: 1,
-    accept: { "image/*": [] },
+    accept: { "*": [] },
     getFilesFromEvent: (event) => myCustomFileGetter(event),
   });
 

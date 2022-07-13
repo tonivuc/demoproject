@@ -14,21 +14,21 @@ const DynamicFileUploadForm = (props) => {
     { prompt: "Signed equipment agreement", required: true },
   ]);
 
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState(new Map());
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const updateSelectedFile = (fileInputNr, selectedFile) => {
     setSelectedFiles((selectedFiles) => {
-      const newSelectedFiles = [...selectedFiles];
-      newSelectedFiles[fileInputNr] = selectedFile;
-      return newSelectedFiles;
+      var map = new Map(selectedFiles);
+      map.set(fileInputNr, selectedFile);
+      return map;
     });
   };
 
   const onFileUpload = () => {
     const formData = new FormData();
 
-    selectedFiles.map((selectedFile) => {
+    getArrayFromMap(selectedFiles).map((selectedFile) => {
       formData.append("myFile", selectedFile, selectedFile.name);
     });
     setUploadedFiles(selectedFiles);
@@ -69,7 +69,7 @@ const DynamicFileUploadForm = (props) => {
               inputNr={index}
               onDrop={onDrop}
             />
-            <UploadedFile file={selectedFiles[index]} />
+            <UploadedFile file={selectedFiles.get(index)} />
           </div>
         ))}
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
@@ -80,21 +80,25 @@ const DynamicFileUploadForm = (props) => {
               inputNr={inputProps.length + index}
               onDrop={onDrop}
             />
-            <UploadedFile file={selectedFiles[inputProps.length + index]} />
+            <UploadedFile file={selectedFiles.get(inputProps.length + index)} />
           </div>
         ))}
-        <Button onClick={onFileUpload}>Upload pictures</Button>
-        {uploadedFiles.map((uploadedFile) => {
+        <Button onClick={onFileUpload}>Upload files</Button>
+        {/* {getArrayFromMap(uploadedFiles).map((uploadedFile) => {
           return (
             <div key={uniqid() + uploadedFile.name}>
               <p>{uploadedFile.name}</p>
               <img src={provideImgSrc(uploadedFile)}></img>
             </div>
           );
-        })}
+        })} */}
       </Stack>
     </Form>
   );
+};
+
+const getArrayFromMap = (map) => {
+  return Array.from(map.values());
 };
 
 const UploadedFile = ({ file }) => {
