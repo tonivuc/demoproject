@@ -53,7 +53,7 @@ function BasicDropzone({ onDrop }) {
     [isFocused, isDragAccept, isDragReject]
   );
 
-  const files = acceptedFiles.map((file) => <p key={file.path}>{file.path}</p>);
+  //const files = acceptedFiles.map((file) => <p key={file.path}>{file.path}</p>);
 
   return (
     <div>
@@ -61,9 +61,6 @@ function BasicDropzone({ onDrop }) {
         <input {...getInputProps()} />
         <p>Drag 'n' drop file, or click to select file</p>
       </div>
-      <aside>
-        <ul>{files}</ul>
-      </aside>
     </div>
   );
 }

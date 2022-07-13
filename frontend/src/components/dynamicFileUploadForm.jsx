@@ -64,17 +64,18 @@ const DynamicFileUploadForm = (props) => {
   };
 
   const onDrop = useCallback((acceptedFiles) => {
+    console.log("SelectefFiles: " + selectedFiles);
     console.log("Inside onDrop");
     acceptedFiles.map((file) => {
       console.log("Inside acceptedFiles.map");
-      //   setSelectedFiles((selectedFiles) => {
-      //     console.log("Inside setSelectedFiles");
-      //     const newSelectedFiles = [...selectedFiles];
-      //     newSelectedFiles[0] = file;
-      //     //console.log("newSelectedFiles");
-      //     //console.log(newSelectedFiles);
-      //     return newSelectedFiles;
-      //   });
+      setSelectedFiles((selectedFiles) => {
+        console.log("Inside setSelectedFiles");
+        const newSelectedFiles = [...selectedFiles];
+        newSelectedFiles[0] = file;
+        //console.log("newSelectedFiles");
+        //console.log(newSelectedFiles);
+        return newSelectedFiles;
+      });
       return file;
     });
   }, []);
@@ -96,14 +97,16 @@ const DynamicFileUploadForm = (props) => {
     <Form>
       <Stack>
         {inputProps.map((inputProp, index) => (
-          <BasicDropzone
-            key={uniqid()}
-            required={inputProp.required}
-            prompt={inputProp.prompt}
-            inputNr={index}
-            onSelectedFileChange={updateSelectedFile}
-            onDrop={onDrop}
-          />
+          <div key={uniqid()}>
+            <BasicDropzone
+              required={inputProp.required}
+              prompt={inputProp.prompt}
+              inputNr={index}
+              onSelectedFileChange={updateSelectedFile}
+              onDrop={onDrop}
+            />
+            <UploadedFile file={selectedFiles[index]} />
+          </div>
         ))}
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
         {optionalInputsProps.map((inputProp, index) => (
@@ -127,6 +130,10 @@ const DynamicFileUploadForm = (props) => {
       </Stack>
     </Form>
   );
+};
+
+const UploadedFile = ({ file }) => {
+  return <p>{file?.name}</p>;
 };
 
 export default DynamicFileUploadForm;
