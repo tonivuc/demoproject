@@ -29,7 +29,7 @@ const rejectStyle = {
   borderColor: "#ff1744",
 };
 
-function BasicDropzone({ onDrop }) {
+function BasicDropzone({ onDrop, inputNr, prompt }) {
   const {
     acceptedFiles,
     getRootProps,
@@ -41,7 +41,27 @@ function BasicDropzone({ onDrop }) {
     onDrop,
     maxFiles: 1,
     accept: { "image/*": [] },
+    getFilesFromEvent: (event) => myCustomFileGetter(event),
   });
+
+  async function myCustomFileGetter(event) {
+    const files = [];
+    const fileList = event.dataTransfer
+      ? event.dataTransfer.files
+      : event.target.files;
+
+    for (var i = 0; i < fileList.length; i++) {
+      const file = fileList.item(i);
+
+      Object.defineProperty(file, "inputNr", {
+        value: inputNr,
+      });
+
+      files.push(file);
+    }
+
+    return files;
+  }
 
   const style = useMemo(
     () => ({
@@ -57,6 +77,7 @@ function BasicDropzone({ onDrop }) {
 
   return (
     <div>
+      <p>{prompt}</p>
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop file, or click to select file</p>
