@@ -49,7 +49,7 @@ const DynamicFileUploadForm = (props) => {
     <Form>
       <Stack>
         {inputProps.map((inputProp, index) => (
-          <div key={uniqid()}>
+          <div key={inputProp.prompt}>
             <BasicDropzone
               prompt={inputProp.prompt}
               inputNr={index}
@@ -60,7 +60,7 @@ const DynamicFileUploadForm = (props) => {
         ))}
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
         {optionalInputsProps.map((inputProp, index) => (
-          <div key={uniqid()}>
+          <div key={inputProp.prompt}>
             <BasicDropzone
               prompt={inputProp.prompt}
               inputNr={inputProps.length + index}
