@@ -1,4 +1,4 @@
-import FileUploadForm from "../components/fileUploadForm";
+import FileUploadForm from "../components/old/fileUploadForm";
 
 function FileUploadPage() {
   return (
