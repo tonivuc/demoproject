@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
 import FileUploadInput from "./fileUploadInput";
 import { uploadFiles } from "../api/files";
 import uniqid from "uniqid";
+import BasicDropzone from "./basicDropzone";
 
 const DynamicFileUploadForm = (props) => {
   const { optionalInputsProps } = props;
@@ -62,6 +63,22 @@ const DynamicFileUploadForm = (props) => {
     return URL.createObjectURL(file);
   };
 
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log("Inside onDrop");
+    acceptedFiles.map((file) => {
+      console.log("Inside acceptedFiles.map");
+      //   setSelectedFiles((selectedFiles) => {
+      //     console.log("Inside setSelectedFiles");
+      //     const newSelectedFiles = [...selectedFiles];
+      //     newSelectedFiles[0] = file;
+      //     //console.log("newSelectedFiles");
+      //     //console.log(newSelectedFiles);
+      //     return newSelectedFiles;
+      //   });
+      return file;
+    });
+  }, []);
+
   const FileUploadInputs = ({ inputPrompts: inputProps }) => {
     return inputProps.map((inputProp, index) => (
       <FileUploadInput
@@ -79,12 +96,13 @@ const DynamicFileUploadForm = (props) => {
     <Form>
       <Stack>
         {inputProps.map((inputProp, index) => (
-          <FileUploadInput
+          <BasicDropzone
             key={uniqid()}
             required={inputProp.required}
             prompt={inputProp.prompt}
             inputNr={index}
             onSelectedFileChange={updateSelectedFile}
+            onDrop={onDrop}
           />
         ))}
         {optionalInputsProps?.length ? <h3>Optional documents</h3> : null}
