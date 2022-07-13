@@ -32,6 +32,11 @@ export default function MainNav() {
               </Nav.Link>
             </Nav.Item>
             <Nav.Item>
+              <Nav.Link as={NavLink} to="/documents-upload">
+                Document upload
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
               <Nav.Link eventKey="disabled" disabled>
                 Disabled
               </Nav.Link>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Stack } from "react-bootstrap";
 import FileUploadInput from "./fileUploadInput";
-import { uploadFiles } from "../api/files";
+import { uploadFiles } from "../../api/files";
 import uniqid from "uniqid";
 
 const FileUploadForm = () => {
