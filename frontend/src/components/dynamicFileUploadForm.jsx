@@ -1,6 +1,5 @@
 import { useCallback, useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
-import FileUploadInput from "./fileUploadInput";
 import { uploadFiles } from "../api/files";
 import uniqid from "uniqid";
 import BasicDropzone from "./basicDropzone";
@@ -46,19 +45,6 @@ const DynamicFileUploadForm = (props) => {
     });
   }, []);
 
-  const FileUploadInputs = ({ inputPrompts: inputProps }) => {
-    return inputProps.map((inputProp, index) => (
-      <FileUploadInput
-        setSelectedFiles={setSelectedFiles}
-        uniqueId={uniqid()}
-        required={inputProp.required}
-        prompt={inputProp.prompt}
-        inputNr={index}
-        onSelectedFileChange={updateSelectedFile}
-      />
-    ));
-  };
-
   return (
     <Form>
       <Stack>
@@ -84,14 +70,17 @@ const DynamicFileUploadForm = (props) => {
           </div>
         ))}
         <Button onClick={onFileUpload}>Upload files</Button>
-        {/* {getArrayFromMap(uploadedFiles).map((uploadedFile) => {
+        {getArrayFromMap(uploadedFiles).map((uploadedFile) => {
           return (
             <div key={uniqid() + uploadedFile.name}>
               <p>{uploadedFile.name}</p>
-              <img src={provideImgSrc(uploadedFile)}></img>
+              <img
+                style={{ width: "400px" }}
+                src={provideImgSrc(uploadedFile)}
+              ></img>
             </div>
           );
-        })} */}
+        })}
       </Stack>
     </Form>
   );
